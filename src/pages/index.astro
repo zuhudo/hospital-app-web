@@ -1,0 +1,276 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import DoctorCard from '../components/DoctorCard.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+
+const services = [
+  {
+    icon: '<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>',
+    title: 'Cardiology',
+    description: 'Comprehensive heart care with advanced diagnostics and treatment options for all cardiac conditions.',
+    color: 'primary',
+  },
+  {
+    icon: '<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>',
+    title: 'Neurology',
+    description: 'Expert neurological care for brain, spine, and nervous system disorders with cutting-edge technology.',
+    color: 'accent',
+  },
+  {
+    icon: '<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>',
+    title: 'Pediatrics',
+    description: 'Specialized healthcare for infants, children, and adolescents in a warm and friendly environment.',
+    color: 'green',
+  },
+  {
+    icon: '<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>',
+    title: 'Laboratory',
+    description: 'State-of-the-art diagnostic laboratory with fast and accurate test results for better treatment.',
+    color: 'purple',
+  },
+  {
+    icon: '<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>',
+    title: 'Emergency',
+    description: '24/7 emergency services with rapid response teams and fully equipped emergency rooms.',
+    color: 'orange',
+  },
+  {
+    icon: '<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>',
+    title: 'Orthopedics',
+    description: 'Expert bone and joint care with minimally invasive surgical techniques and rehabilitation.',
+    color: 'pink',
+  },
+];
+
+const doctors = [
+  { name: 'Dr. Sarah Johnson', specialization: 'Cardiologist', rating: 4.8, experience: '15 years experience' },
+  { name: 'Dr. Michael Chen', specialization: 'Neurologist', rating: 4.9, experience: '12 years experience' },
+  { name: 'Dr. Emily Williams', specialization: 'Pediatrician', rating: 4.7, experience: '8 years experience' },
+  { name: 'Dr. James Brown', specialization: 'Orthopedic Surgeon', rating: 4.6, experience: '20 years experience' },
+];
+
+const testimonials = [
+  {
+    name: 'Maria Garcia',
+    role: 'Patient',
+    testimonial: 'The care I received at MediCare was exceptional. The doctors were thorough and the staff was incredibly supportive throughout my treatment.',
+    rating: 5,
+  },
+  {
+    name: 'Robert Wilson',
+    role: 'Patient',
+    testimonial: 'Outstanding cardiology department. Dr. Johnson saved my life with her quick diagnosis and expert treatment. Forever grateful!',
+    rating: 5,
+  },
+  {
+    name: 'Lisa Chen',
+    role: 'Patient',
+    testimonial: 'Best pediatric care for my children. The doctors are patient, kind, and truly care about their young patients.',
+    rating: 4,
+  },
+];
+---
+
+<MainLayout title="Home">
+  <Hero />
+
+  <!-- Services Section -->
+  <section class="section-padding bg-white" id="services">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Our Services</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
+          Comprehensive Healthcare Solutions
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl mx-auto">
+          We offer a wide range of medical services to meet all your healthcare needs under one roof.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map(service => <ServiceCard {...service} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="section-padding bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Why Choose Us</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">
+            Trusted Healthcare For Your Family
+          </h2>
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-1">Advanced Technology</h3>
+                <p class="text-sm text-gray-500">State-of-the-art medical equipment and cutting-edge treatment methods.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-12 h-12 bg-accent-100 rounded-xl flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-1">Expert Doctors</h3>
+                <p class="text-sm text-gray-500">Board-certified physicians with years of experience in their specialties.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-1">24/7 Availability</h3>
+                <p class="text-sm text-gray-500">Round-the-clock emergency services and patient support.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gradient-to-br from-primary-500 to-primary-700 rounded-3xl p-8 text-white">
+          <h3 class="text-2xl font-bold mb-6">Quick Stats</h3>
+          <div class="grid grid-cols-2 gap-6">
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-6">
+              <div class="text-4xl font-bold">50+</div>
+              <div class="text-white/70 text-sm mt-1">Expert Doctors</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-6">
+              <div class="text-4xl font-bold">10k+</div>
+              <div class="text-white/70 text-sm mt-1">Happy Patients</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-6">
+              <div class="text-4xl font-bold">25+</div>
+              <div class="text-white/70 text-sm mt-1">Departments</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-6">
+              <div class="text-4xl font-bold">15+</div>
+              <div class="text-white/70 text-sm mt-1">Awards Won</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Doctors Section -->
+  <section class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Our Team</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
+          Meet Our Expert Doctors
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {doctors.map(doctor => <DoctorCard {...doctor} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section-padding bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Testimonials</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
+          What Our Patients Say
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {testimonials.map(t => <TestimonialCard {...t} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile App Download -->
+  <section class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="bg-gradient-to-br from-primary-600 to-primary-800 rounded-3xl p-8 md:p-12 lg:p-16">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="text-white">
+            <span class="text-primary-200 font-semibold text-sm uppercase tracking-wider">Download Our App</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">
+              Healthcare at Your Fingertips
+            </h2>
+            <p class="text-white/80 mb-8 text-lg">
+              Book appointments, view medical records, and manage your health — all from your phone.
+              Available on iOS and Android.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <!-- App Store Button -->
+              <a href="https://github.com/zuhudo/hospital-app-mobile/releases/latest" class="inline-flex items-center gap-3 bg-black/20 backdrop-blur-sm rounded-xl px-6 py-3 hover:bg-black/30 transition-colors">
+                <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                <div>
+                  <p class="text-xs text-white/60">Download on the</p>
+                  <p class="text-lg font-semibold">App Store</p>
+                </div>
+              </a>
+              <!-- Google Play Button -->
+              <a href="https://github.com/zuhudo/hospital-app-mobile/releases/latest" class="inline-flex items-center gap-3 bg-black/20 backdrop-blur-sm rounded-xl px-6 py-3 hover:bg-black/30 transition-colors">
+                <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3.18 23.18L14.31 12 3.18.82a1.25 1.25 0 00-.06 1.34l8.13 4.06L14.31 12l-3.06 5.78-8.13 4.06a1.25 1.25 0 00.06 1.34zm14.13-14.13l3.59 3.59-3.59 3.59-2.12-2.12L17.31 12l-2.12-2.12 2.12-2.11zm-7.07-7.07l2.12 2.12L10.24 6.22 7.18 3.16a1.25 1.25 0 01.06-1.34zM10.24 17.78l2.12 2.12-2.12 2.12a1.25 1.25 0 01-.06-1.34l3.06-5.78 2.12-2.12-2.12 2.12-3.06 2.88z"/>
+                </svg>
+                <div>
+                  <p class="text-xs text-white/60">Get it on</p>
+                  <p class="text-lg font-semibold">Google Play</p>
+                </div>
+              </a>
+            </div>
+            <p class="text-white/40 text-sm mt-4">
+              APK also available for direct download
+            </p>
+          </div>
+          <!-- Phone Mockup -->
+          <div class="hidden lg:flex justify-center">
+            <div class="relative">
+              <div class="w-64 h-[480px] bg-white/10 rounded-[40px] border-2 border-white/20 p-4 backdrop-blur-sm">
+                <div class="w-full h-full bg-white/5 rounded-[32px] flex items-center justify-center">
+                  <div class="text-center">
+                    <svg class="w-16 h-16 mx-auto text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    <p class="text-white/40 mt-2 text-sm">MediCare App</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-padding bg-gradient-to-r from-primary-600 to-primary-800 text-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">
+        Ready to Take the First Step?
+      </h2>
+      <p class="text-white/80 mb-8 text-lg">
+        Book an appointment today and experience the best healthcare services.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/contact" class="btn-primary bg-white text-primary-600 hover:bg-gray-100">
+          Book Appointment
+        </a>
+        <a href="tel:+1234567890" class="btn-secondary border-white text-white hover:bg-white/10">
+          Call Us Now
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
